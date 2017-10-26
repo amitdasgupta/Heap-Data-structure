@@ -150,10 +150,27 @@ void heapDeleteMaxHeap(Heap* h)
     heapifyAnElement(h,0);
 
 }
+/***************code to build an heap from an array*///////////////////////////
+void buildHeap(Heap* &h,int arr_[],int n)
+{
+    h=new Heap(n,1);
+    h->size_=n;
+    int i;
+    for(i=0;i<n;i++)
+    {
+        h->arr[i]=arr_[i];
+    }
+    i=n-1;
+    while(parentOfAnyNode(h,i)!=-1)
+    {
+        i=parentOfAnyNode(h,i);
+        heapifyAnElement(h,i);
+    }
+}
 int main()
 {
     Heap* h=NULL;
-    insertIntoMaxHeap(h,3);
+    /*insertIntoMaxHeap(h,3);
     insertIntoMaxHeap(h,2);
     insertIntoMaxHeap(h,4);
     insertIntoMaxHeap(h,1);
@@ -164,6 +181,15 @@ int main()
     printHeapArray(h);
     heapDeleteMaxHeap(h);
     cout<<"\nafter deletion elements are";
+    printHeapArray(h);*/
+    int arr[10000],n,temp;
+    cin>>n;
+    for(int i=0;i<n;i++)
+    {
+        cin>>temp;
+        arr[i]=temp;
+    }
+    buildHeap(h,arr,n);
     printHeapArray(h);
 
     return 0;
