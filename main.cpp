@@ -3,6 +3,7 @@
 #define MAX_HEAP 1
 #define MIN_HEAP 0;
 using namespace std;
+/******************defination of heap*/////////////////////////////
 class Heap{
 public:
     int *arr;
@@ -17,6 +18,7 @@ public:
         this->size_=0;
     }
 };
+/************parent of any node*///////////////////////////////////
 int parentOfAnyNode(Heap* heap,int i)
 {
     if(i<=0||i>=heap->size_)
@@ -24,6 +26,7 @@ int parentOfAnyNode(Heap* heap,int i)
     else
         return (i-1)/2;
 }
+/*********************childs of any node*//////////////////////
 pair<int,int> ChildsOfAnyNode(Heap* heap,int i)
 {
    int left=2*i+1;
@@ -38,6 +41,7 @@ pair<int,int> ChildsOfAnyNode(Heap* heap,int i)
    else
     return make_pair(left,right);
 }
+/************************maximum elemnt of amx heap*/////////////////////
 int maximumElementOfMaxHeap(Heap* h)
 {
     if(!h)
@@ -45,6 +49,7 @@ int maximumElementOfMaxHeap(Heap* h)
     else
         return h->arr[0];
 }
+/*****************************minimum element of minheap*///////////////
 int minimumElemntOfMinHeap(Heap* h)
 {
     if(!h)
@@ -52,6 +57,7 @@ int minimumElemntOfMinHeap(Heap* h)
     else
         return h->arr[0];
 }
+/******************code to resize a heap*////////////////
 void resizeHeap(Heap* &h)
 {
     int *new_array=new int[h->capacity*2];
@@ -63,6 +69,7 @@ void resizeHeap(Heap* &h)
     h->capacity=2*h->capacity;
     h->arr=new_array;
 }
+/************************************code to inser an elemnt in a heap*/////////////////
 void insertIntoMaxHeap(Heap* &h,int data)
 {
     if(!h)
@@ -89,6 +96,7 @@ void insertIntoMaxHeap(Heap* &h,int data)
         h->arr[i]=data;
     }
 }
+/*********************code to print the heap*//////////////////////////////
 void printHeapArray(Heap* h)
 {
 
@@ -102,11 +110,11 @@ int main()
     Heap* h=NULL;
     insertIntoMaxHeap(h,3);
     insertIntoMaxHeap(h,2);
-     insertIntoMaxHeap(h,4);
-        insertIntoMaxHeap(h,1);
-          insertIntoMaxHeap(h,6);
-            insertIntoMaxHeap(h,13);
-              insertIntoMaxHeap(h,17);
+    insertIntoMaxHeap(h,4);
+    insertIntoMaxHeap(h,1);
+    insertIntoMaxHeap(h,6);
+    insertIntoMaxHeap(h,13);
+    insertIntoMaxHeap(h,17);
     printHeapArray(h);
 
     return 0;
