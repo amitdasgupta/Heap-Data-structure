@@ -58,7 +58,7 @@ int minimumElemntOfMinHeap(Heap* h)
         return h->arr[0];
 }
 /******************code to resize a heap*////////////////
-void resizeHeap(Heap* &h)
+void resizeHeap(Heap* h)
 {
     int *new_array=new int[h->capacity*2];
     for(int i=0;i<h->capacity;i++)
@@ -99,11 +99,56 @@ void insertIntoMaxHeap(Heap* &h,int data)
 /*********************code to print the heap*//////////////////////////////
 void printHeapArray(Heap* h)
 {
-
+     cout<<"\n";
     for(int i=0;i<h->size_;i++)
     {
         cout<<h->arr[i]<< " ";
     }
+}
+/*************************hepifying an element*////////////////
+void heapifyAnElement(Heap* h,int i)
+{
+    int left,right,temp,max_;
+    tie(left,right)=ChildsOfAnyNode(h,i);
+   // cout<<left<<" "<<right;
+    //return;
+   // cout<<"amit";
+    if(left==-1&&right==-1)
+        return;
+    else
+    if(left!=-1&&right!=-1)
+   {
+        max_=h->arr[left]>h->arr[right]?left:right;
+    max_=h->arr[i]>h->arr[max_]?i:max_;
+   // cout<<max_;
+    //return;
+   }
+   else if(left!=-1)
+   {
+       max_=h->arr[left]>h->arr[i]?left:i;
+   }
+   else if(right!=-1)
+   {
+    max_=h->arr[right]>h->arr[i]?right:i;
+   }
+    if(i!=max_)
+    {  // cout<<max_<<" ";
+        temp=h->arr[i];
+        h->arr[i]=h->arr[max_];
+        h->arr[max_]=temp;
+        heapifyAnElement(h,max_);
+    }
+    else
+        return;
+}
+/*******************code to delete an element*////////////////
+void heapDeleteMaxHeap(Heap* h)
+{
+    h->arr[0]=h->arr[h->size_-1];
+    h->size_--;
+    //cout<<"C";
+    heapifyAnElement(h,0);
+
 }
 int main()
 {
@@ -115,6 +160,10 @@ int main()
     insertIntoMaxHeap(h,6);
     insertIntoMaxHeap(h,13);
     insertIntoMaxHeap(h,17);
+ //   cout<<h->capacity<<" "<<h->size_;
+    printHeapArray(h);
+    heapDeleteMaxHeap(h);
+    cout<<"\nafter deletion elements are";
     printHeapArray(h);
 
     return 0;
