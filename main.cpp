@@ -167,6 +167,18 @@ void buildHeap(Heap* &h,int arr_[],int n)
         heapifyAnElement(h,i);
     }
 }
+void heapSort(Heap* h)
+{
+    int temp;
+    while(h->size_>0)
+    {
+       temp= h->arr[h->size_-1];
+       h->arr[h->size_-1]=h->arr[0];
+       h->arr[0]=temp;
+        h->size_--;
+        heapifyAnElement(h,0);
+    }
+}
 int main()
 {
     Heap* h=NULL;
@@ -190,6 +202,10 @@ int main()
         arr[i]=temp;
     }
     buildHeap(h,arr,n);
+    printHeapArray(h);
+    heapSort(h);
+    h->size_=n;
+    cout<<"\nsorted array";
     printHeapArray(h);
 
     return 0;
