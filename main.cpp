@@ -69,7 +69,7 @@ void resizeHeap(Heap* &h)
     h->capacity=2*h->capacity;
     h->arr=new_array;
 }
-/************************************code to insert an elemnet in a Max-heap*/////////////////
+/************************************code to insert an elemnet in a Max-heap
 void insertIntoMaxHeap(Heap* &h,int data)
 {
     if(!h)
@@ -95,7 +95,7 @@ void insertIntoMaxHeap(Heap* &h,int data)
         }
         h->arr[i]=data;
     }
-}
+}*/////////////////
 /*******************code to insert data into min heap*///////////////////////////
 void insertIntoMinHeap(Heap* &h,int data)
 {
@@ -104,15 +104,22 @@ void insertIntoMinHeap(Heap* &h,int data)
         h=new Heap(1,0);
         h->size_=1;
         h->arr[0]=data;
+        return;
     }
+    else
+
+    {
+      //   cout<<"c";
     h->size_++;
     int i=h->size_-1;
-    while(parentOfAnyNode(h,i)!=-1&&h->arr[parentOfAnyNode()>data])
+  //  cout<<h->size_<<"C";
+    while(parentOfAnyNode(h,i)!=-1&&h->arr[parentOfAnyNode(h,i)]>data)
     {
-        h->arr[i]=h->arr[parentOfAnyNode(i)];
+        h->arr[i]=h->arr[parentOfAnyNode(h,i)];
         i=parentOfAnyNode(h,i);
     }
     h->arr[i]=data;
+    }
 
 }
 /*********************code to print the heap*//////////////////////////////
@@ -124,8 +131,7 @@ void printHeapArray(Heap* h)
         cout<<h->arr[i]<< " ";
     }
 }
-<<<<<<< HEAD
-/*************************hepifying an element in max heap*////////////////
+/*************************hepifying an element in max heap*
 void heapifyAnElement(Heap* h,int i)
 {
     int left,right,temp,max_;
@@ -160,7 +166,7 @@ void heapifyAnElement(Heap* h,int i)
     }
     else
         return;
-}
+}////////////////
 /**********************code to heapify an min heap*////////////////////
 void heapifyAnElementMinHeap(Heap* h,int i)
 {
@@ -168,7 +174,7 @@ void heapifyAnElementMinHeap(Heap* h,int i)
         return;
     else
     {    int x,y,min_,temp;
-        tie(x,y)=ChildsOfAnyNode(i);
+        tie(x,y)=ChildsOfAnyNode(h,i);
         if(x!=-1&&y!=-1)
         {
             min_=h->arr[x]<h->arr[y]?x:y;
@@ -189,16 +195,16 @@ void heapifyAnElementMinHeap(Heap* h,int i)
             return;
         if(min_!=i)
         {
-            h->arr[i]=temp;
-            temp=h->arr[min_];
-            h->arr[min_]=temp
-            heapifyAnElementMinHeap(h,min_)
+            temp=h->arr[i];
+           h->arr[i]=h->arr[min_];
+            h->arr[min_]=temp;
+            heapifyAnElementMinHeap(h,min_);
         }
         else
             return;
     }
 }
-/*******************code to delete an element in in heap*////////////////
+/*******************code to delete an element in in heap
 void heapDeleteMaxHeap(Heap* h)
 {
     h->arr[0]=h->arr[h->size_-1];
@@ -206,18 +212,15 @@ void heapDeleteMaxHeap(Heap* h)
     //cout<<"C";
     heapifyAnElement(h,0);
 
-}
+}*////////////////
 /******************code to delete an elemnt in amx heap*/////////////////
 void heapDeleteMinHeap(Heap* h)
-=======
-int main()
->>>>>>> parent of dbe83c2... deleting an element in max-heap and then heapifying it.
 {
-    h->arr[0]=h->arr[h->size_-];
+    h->arr[0]=h->arr[h->size_];
     h->size_--;
-    heapifyAnElementMinHeap(h,i)
+    heapifyAnElementMinHeap(h,0);
 }
-/***************code to build an heap from an array*///////////////////////////
+/***************code to build an heap from an array
 void buildHeap(Heap* &h,int arr_[],int n)
 {
     h=new Heap(n,1);
@@ -233,7 +236,7 @@ void buildHeap(Heap* &h,int arr_[],int n)
         i=parentOfAnyNode(h,i);
         heapifyAnElement(h,i);
     }
-}
+}*///////////////////////////
 /*****************************build min heap*/////////////////////
 void buildHeapMin(Heap* &h,int arr[],int n)
 {
@@ -244,12 +247,13 @@ void buildHeapMin(Heap* &h,int arr[],int n)
         h->arr[i]=arr[i];
     }
     int i=n-1;
-    while(parentOfAnyNode(i)!=-1)
+    while(parentOfAnyNode(h,i)!=-1)
     {
-        i=parentOfAnyNode(i);
+        i=parentOfAnyNode(h,i);
         heapifyAnElementMinHeap(h,i);
     }
 }
+/********************function to do heap sort of an array
 void heapSort(Heap* h)
 {
     int temp;
@@ -261,7 +265,8 @@ void heapSort(Heap* h)
         h->size_--;
         heapifyAnElement(h,0);
     }
-}
+}*////////////////
+/*********************
 bool isHeap(Heap* h,int node)
 {
 if(!h)
@@ -282,7 +287,7 @@ else
     return true;
 
 }
-}
+}*/////////////////////
 int main()
 {/************
     Heap* h=NULL;
@@ -292,7 +297,7 @@ int main()
     insertIntoMaxHeap(h,1);
     insertIntoMaxHeap(h,6);
     insertIntoMaxHeap(h,13);
-<<<<<<< HEAD
+
     insertIntoMaxHeap(h,17);*//////////////////////////
  //   cout<<h->capacity<<" "<<h->size_;
    // printHeapArray(h);
@@ -316,10 +321,14 @@ int main()
     cout<<"yes it is a heap";
     else
         cout<<"it is not an heap";*/////////////
-=======
-    insertIntoMaxHeap(h,17);
-    printHeapArray(h);
->>>>>>> parent of dbe83c2... deleting an element in max-heap and then heapifying it.
 
+     Heap* h=NULL;
+    insertIntoMinHeap(h,3);
+    insertIntoMinHeap(h,2);
+    insertIntoMinHeap(h,4);
+    insertIntoMinHeap(h,1);
+    insertIntoMinHeap(h,6);
+    insertIntoMinHeap(h,13);
+    printHeapArray(h);
     return 0;
 }
