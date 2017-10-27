@@ -1,5 +1,6 @@
 #include <iostream>
 #include<tuple>
+#include<vector>
 #define MAX_HEAP 1
 #define MIN_HEAP 0;
 using namespace std;
@@ -319,8 +320,27 @@ void deleteArbitraryElementFromMinHeap(Heap* h,int data)
     heapifyAnElementMinHeap(h,child);
 
 }
+/*************code to print all the elements less than given element*/////////////////////
+void printSmallerThan(Heap* h,int data,int i,vector<int> &vec)
+{
+    if(h->arr[i]>data)
+        return;
+    else
+        {
+            if(h->arr[i]<data)
+        vec.push_back(h->arr[i]);
+        int x,y;
+        tie(x,y)=ChildsOfAnyNode(h,i);
+        if(x==-1&&y==-1)
+            return;
+        if(x!=-1)
+        printSmallerThan(h,data,x,vec);
+        if(y!=-1)
+        printSmallerThan(h,data,y,vec);
+        }
+}
 int main()
-{/************
+{   /************
     Heap* h=NULL;
     insertIntoMaxHeap(h,3);
     insertIntoMaxHeap(h,2);
@@ -330,12 +350,12 @@ int main()
     insertIntoMaxHeap(h,13);
 
     insertIntoMaxHeap(h,17);*//////////////////////////
- //   cout<<h->capacity<<" "<<h->size_;
-   // printHeapArray(h);
-   // heapDeleteMaxHeap(h);
-   /**** cout<<"\nafter deletion elements are";
+    //   cout<<h->capacity<<" "<<h->size_;
+    // printHeapArray(h);
+    // heapDeleteMaxHeap(h);
+    /**** cout<<"\nafter deletion elements are";
     printHeapArray(h);*/
-   /********* int arr[10000],n,temp;
+    /********* int arr[10000],n,temp;
     cin>>n;
     for(int i=0;i<n;i++)
     {
@@ -353,7 +373,7 @@ int main()
     else
         cout<<"it is not an heap";*/////////////
 
-     Heap* h=NULL;
+    Heap* h=NULL;
     insertIntoMinHeap(h,3);
     insertIntoMinHeap(h,2);
     insertIntoMinHeap(h,4);
@@ -361,11 +381,18 @@ int main()
     insertIntoMinHeap(h,6);
     insertIntoMinHeap(h,13);
     printHeapArray(h);
-   /*** cout<<"\n maximum element in min heap is";
+    /*** cout<<"\n maximum element in min heap is";
     cout<<giveMaxElementInMinHeap(h);*///
-    int data;
+ /****   int data;
     cin>>data;
     deleteArbitraryElementFromMinHeap(h,data);
-    printHeapArray(h);
+    printHeapArray(h);*///
+    vector<int>  vec;
+    int data;
+    cin>>data;
+    printSmallerThan(h,data,0,vec);
+    cout<<"\nsmaller elements are";
+    for(auto it:vec)
+        cout<<it<<" ";
     return 0;
 }
