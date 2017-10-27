@@ -42,7 +42,7 @@ pair<int,int> ChildsOfAnyNode(Heap* heap,int i)
    else
     return make_pair(left,right);
 }
-/************************maximum elemnt of amx heap*/////////////////////
+/************************maximum elemnt of max heap*/////////////////////
 int maximumElementOfMaxHeap(Heap* h)
 {
     if(!h)
@@ -70,7 +70,7 @@ void resizeHeap(Heap* &h)
     h->capacity=2*h->capacity;
     h->arr=new_array;
 }
-/************************************code to insert an elemnet in a Max-heap
+/************************************code to insert an elemnet in a Max-heap*/////////////////
 void insertIntoMaxHeap(Heap* &h,int data)
 {
     if(!h)
@@ -96,8 +96,8 @@ void insertIntoMaxHeap(Heap* &h,int data)
         }
         h->arr[i]=data;
     }
-}*/////////////////
-/*******************code to insert data into min heap*///////////////////////////
+}
+/*******************code to insert data into min heap
 void insertIntoMinHeap(Heap* &h,int data)
 {
     if(!h)
@@ -122,17 +122,17 @@ void insertIntoMinHeap(Heap* &h,int data)
     h->arr[i]=data;
     }
 
-}
+}*///////////////////////////
 /*********************code to print the heap*//////////////////////////////
 void printHeapArray(Heap* h)
 {
-
+    cout<<"\n";
     for(int i=0;i<h->size_;i++)
     {
         cout<<h->arr[i]<< " ";
     }
 }
-/*************************hepifying an element in max heap*
+/*************************hepifying an element in max heap*////////////////
 void heapifyAnElement(Heap* h,int i)
 {
     int left,right,temp,max_;
@@ -167,7 +167,7 @@ void heapifyAnElement(Heap* h,int i)
     }
     else
         return;
-}////////////////
+}
 /**********************code to heapify an min heap*////////////////////
 void heapifyAnElementMinHeap(Heap* h,int i)
 {
@@ -205,7 +205,7 @@ void heapifyAnElementMinHeap(Heap* h,int i)
             return;
     }
 }
-/*******************code to delete an element in in heap
+/*******************code to delete an element in in heap*////////////////
 void heapDeleteMaxHeap(Heap* h)
 {
     h->arr[0]=h->arr[h->size_-1];
@@ -213,7 +213,7 @@ void heapDeleteMaxHeap(Heap* h)
     //cout<<"C";
     heapifyAnElement(h,0);
 
-}*////////////////
+}
 /******************code to delete an elemnt in amx heap*/////////////////
 void heapDeleteMinHeap(Heap* h)
 {
@@ -221,7 +221,7 @@ void heapDeleteMinHeap(Heap* h)
     h->size_--;
     heapifyAnElementMinHeap(h,0);
 }
-/***************code to build an heap from an array
+/***************code to build an heap from an array*///////////////////////////
 void buildHeap(Heap* &h,int arr_[],int n)
 {
     h=new Heap(n,1);
@@ -232,12 +232,13 @@ void buildHeap(Heap* &h,int arr_[],int n)
         h->arr[i]=arr_[i];
     }
     i=n-1;
-    while(parentOfAnyNode(h,i)!=-1)
+    i=parentOfAnyNode(h,i);
+    while(i>=0)
     {
-        i=parentOfAnyNode(h,i);
         heapifyAnElement(h,i);
+        i--;
     }
-}*///////////////////////////
+}
 /*****************************build min heap*/////////////////////
 void buildHeapMin(Heap* &h,int arr[],int n)
 {
@@ -339,6 +340,30 @@ void printSmallerThan(Heap* h,int data,int i,vector<int> &vec)
         printSmallerThan(h,data,y,vec);
         }
 }
+/***************code to delete an heap*////////////=
+void delheap(Heap* h)
+{
+    if(h)
+        if(h->arr)
+        delete[] h->arr;
+    delete h;
+}
+/********************code to merge two heaps*/////////////////////////////
+void mergeMaxHeaps(Heap* &h1,Heap* &h2)
+{
+    int i=0;
+    int *arr_=new int[h1->size_+h2->size_];
+    for(;i<h1->size_;i++)
+        arr_[i]=h1->arr[i];
+    for(;i<(h2->size_+h1->size_);i++)
+        arr_[i]=h2->arr[i-h1->size_];
+    delheap(h1);
+    delheap(h2);
+    cout<<i<<"c";
+    h1=NULL;
+    buildHeap(h1,arr_,i);
+}
+
 int main()
 {   /************
     Heap* h=NULL;
@@ -372,27 +397,46 @@ int main()
     cout<<"yes it is a heap";
     else
         cout<<"it is not an heap";*/////////////
-
-    Heap* h=NULL;
+/**********************thsi section is related to min heaps algorithms*//////////////
+  /***********  Heap* h=NULL;
     insertIntoMinHeap(h,3);
     insertIntoMinHeap(h,2);
     insertIntoMinHeap(h,4);
     insertIntoMinHeap(h,1);
     insertIntoMinHeap(h,6);
     insertIntoMinHeap(h,13);
-    printHeapArray(h);
+    printHeapArray(h);*////////////
     /*** cout<<"\n maximum element in min heap is";
     cout<<giveMaxElementInMinHeap(h);*///
  /****   int data;
     cin>>data;
     deleteArbitraryElementFromMinHeap(h,data);
     printHeapArray(h);*///
-    vector<int>  vec;
+   /******** vector<int>  vec;
     int data;
     cin>>data;
     printSmallerThan(h,data,0,vec);
     cout<<"\nsmaller elements are";
     for(auto it:vec)
         cout<<it<<" ";
-    return 0;
+    return 0;*//////////////////////////
+    Heap* h1=NULL,*h2=NULL;
+     insertIntoMaxHeap(h1,3);
+    insertIntoMaxHeap(h1,2);
+    insertIntoMaxHeap(h1,4);
+    insertIntoMaxHeap(h1,1);
+    insertIntoMaxHeap(h1,6);
+    insertIntoMaxHeap(h1,13);
+    printHeapArray(h1);
+     insertIntoMaxHeap(h2,5);
+    insertIntoMaxHeap(h2,9);
+    insertIntoMaxHeap(h2,13);
+    insertIntoMaxHeap(h2,8);
+    insertIntoMaxHeap(h2,10);
+    insertIntoMaxHeap(h2,20);
+    printHeapArray(h2);
+    mergeMaxHeaps(h1,h2);
+    printHeapArray(h1);
+
+
 }
