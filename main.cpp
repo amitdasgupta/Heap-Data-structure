@@ -288,6 +288,18 @@ else
 
 }
 }*/////////////////////
+/***************code to give maimum element in min heap*///////////////////
+int giveMaxElementInMinHeap(Heap* h)
+{
+    int i=parentOfAnyNode(h,h->size_-1)+1;
+    int max_=0;
+    cout<<"i:"<<i;
+    for(int j=i;j<h->size_;j++)
+        if(h->arr[j]>max_)
+        max_=h->arr[j];
+    return max_;
+
+}
 int main()
 {/************
     Heap* h=NULL;
@@ -330,5 +342,7 @@ int main()
     insertIntoMinHeap(h,6);
     insertIntoMinHeap(h,13);
     printHeapArray(h);
+    cout<<"\n maximum element in min heap is";
+    cout<<giveMaxElementInMinHeap(h);
     return 0;
 }
