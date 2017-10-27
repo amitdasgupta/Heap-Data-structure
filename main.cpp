@@ -293,11 +293,30 @@ int giveMaxElementInMinHeap(Heap* h)
 {
     int i=parentOfAnyNode(h,h->size_-1)+1;
     int max_=0;
-    cout<<"i:"<<i;
+  //  cout<<"i:"<<i;
     for(int j=i;j<h->size_;j++)
         if(h->arr[j]>max_)
         max_=h->arr[j];
     return max_;
+
+}
+/**********************code to delete an arbitrary element from the min heap*///////////////////
+void deleteArbitraryElementFromMinHeap(Heap* h,int data)
+{
+    int x,y,child;
+    int i=0;
+    while(1)
+    {
+        tie(x,y)=ChildsOfAnyNode(h,i);
+        if(h->arr[x]==data||h->arr[y]==data)
+            break;
+        i++;
+        if(i==(h->size_-1));
+    }
+    child=h->arr[x]==data?x:y;
+    h->arr[child]=h->arr[h->size_-1];
+    h->size_--;
+    heapifyAnElementMinHeap(h,child);
 
 }
 int main()
@@ -342,7 +361,11 @@ int main()
     insertIntoMinHeap(h,6);
     insertIntoMinHeap(h,13);
     printHeapArray(h);
-    cout<<"\n maximum element in min heap is";
-    cout<<giveMaxElementInMinHeap(h);
+   /*** cout<<"\n maximum element in min heap is";
+    cout<<giveMaxElementInMinHeap(h);*///
+    int data;
+    cin>>data;
+    deleteArbitraryElementFromMinHeap(h,data);
+    printHeapArray(h);
     return 0;
 }
