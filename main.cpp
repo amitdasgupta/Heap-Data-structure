@@ -179,10 +179,31 @@ void heapSort(Heap* h)
         heapifyAnElement(h,0);
     }
 }
+bool isHeap(Heap* h,int node)
+{
+if(!h)
+    return false;
+else
+{
+int x,y;
+tie(x,y)=ChildsOfAnyNode(h,node);
+cout<<x<<" "<<y<<endl;
+if(x!=-1&&y!=-1)
+return h->arr[x]<h->arr[node]&&h->arr[y]<h->arr[node]&&isHeap(h,x)&&isHeap(h,y);
+if(x!=-1&&y==-1)
+return h->arr[x]<h->arr[node]&&isHeap(h,x);
+else
+if(y!=-1&&x==-1)
+return h->arr[y]<h->arr[node]&&isHeap(h,y);
+else
+    return true;
+
+}
+}
 int main()
 {
     Heap* h=NULL;
-    /*insertIntoMaxHeap(h,3);
+    insertIntoMaxHeap(h,3);
     insertIntoMaxHeap(h,2);
     insertIntoMaxHeap(h,4);
     insertIntoMaxHeap(h,1);
@@ -190,11 +211,11 @@ int main()
     insertIntoMaxHeap(h,13);
     insertIntoMaxHeap(h,17);
  //   cout<<h->capacity<<" "<<h->size_;
-    printHeapArray(h);
-    heapDeleteMaxHeap(h);
-    cout<<"\nafter deletion elements are";
+   // printHeapArray(h);
+   // heapDeleteMaxHeap(h);
+   /**** cout<<"\nafter deletion elements are";
     printHeapArray(h);*/
-    int arr[10000],n,temp;
+   /********* int arr[10000],n,temp;
     cin>>n;
     for(int i=0;i<n;i++)
     {
@@ -206,7 +227,10 @@ int main()
     heapSort(h);
     h->size_=n;
     cout<<"\nsorted array";
-    printHeapArray(h);
-
+    printHeapArray(h);*///////////////
+    if(isHeap(h,0))
+    cout<<"yes it is a heap";
+    else
+        cout<<"it is not an heap";
     return 0;
 }
