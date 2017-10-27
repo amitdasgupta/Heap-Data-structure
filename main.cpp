@@ -58,7 +58,7 @@ int minimumElemntOfMinHeap(Heap* h)
         return h->arr[0];
 }
 /******************code to resize a heap*////////////////
-void resizeHeap(Heap* h)
+void resizeHeap(Heap* &h)
 {
     int *new_array=new int[h->capacity*2];
     for(int i=0;i<h->capacity;i++)
@@ -118,12 +118,13 @@ void insertIntoMinHeap(Heap* &h,int data)
 /*********************code to print the heap*//////////////////////////////
 void printHeapArray(Heap* h)
 {
-     cout<<"\n";
+
     for(int i=0;i<h->size_;i++)
     {
         cout<<h->arr[i]<< " ";
     }
 }
+<<<<<<< HEAD
 /*************************hepifying an element in max heap*////////////////
 void heapifyAnElement(Heap* h,int i)
 {
@@ -208,6 +209,9 @@ void heapDeleteMaxHeap(Heap* h)
 }
 /******************code to delete an elemnt in amx heap*/////////////////
 void heapDeleteMinHeap(Heap* h)
+=======
+int main()
+>>>>>>> parent of dbe83c2... deleting an element in max-heap and then heapifying it.
 {
     h->arr[0]=h->arr[h->size_-];
     h->size_--;
@@ -288,6 +292,7 @@ int main()
     insertIntoMaxHeap(h,1);
     insertIntoMaxHeap(h,6);
     insertIntoMaxHeap(h,13);
+<<<<<<< HEAD
     insertIntoMaxHeap(h,17);*//////////////////////////
  //   cout<<h->capacity<<" "<<h->size_;
    // printHeapArray(h);
@@ -311,6 +316,10 @@ int main()
     cout<<"yes it is a heap";
     else
         cout<<"it is not an heap";*/////////////
+=======
+    insertIntoMaxHeap(h,17);
+    printHeapArray(h);
+>>>>>>> parent of dbe83c2... deleting an element in max-heap and then heapifying it.
 
     return 0;
 }
