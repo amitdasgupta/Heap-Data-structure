@@ -69,7 +69,7 @@ void resizeHeap(Heap* h)
     h->capacity=2*h->capacity;
     h->arr=new_array;
 }
-/************************************code to inser an elemnt in a heap*/////////////////
+/************************************code to insert an elemnet in a Max-heap*/////////////////
 void insertIntoMaxHeap(Heap* &h,int data)
 {
     if(!h)
@@ -96,6 +96,25 @@ void insertIntoMaxHeap(Heap* &h,int data)
         h->arr[i]=data;
     }
 }
+/*******************code to insert data into min heap*///////////////////////////
+void insertIntoMinHeap(Heap* &h,int data)
+{
+    if(!h)
+    {
+        h=new Heap(1,0);
+        h->size_=1;
+        h->arr[0]=data;
+    }
+    h->size_++;
+    int i=h->size_-1;
+    while(parentOfAnyNode(h,i)!=-1&&h->arr[parentOfAnyNode()>data])
+    {
+        h->arr[i]=h->arr[parentOfAnyNode(i)];
+        i=parentOfAnyNode(h,i);
+    }
+    h->arr[i]=data;
+
+}
 /*********************code to print the heap*//////////////////////////////
 void printHeapArray(Heap* h)
 {
@@ -105,7 +124,7 @@ void printHeapArray(Heap* h)
         cout<<h->arr[i]<< " ";
     }
 }
-/*************************hepifying an element*////////////////
+/*************************hepifying an element in max heap*////////////////
 void heapifyAnElement(Heap* h,int i)
 {
     int left,right,temp,max_;
@@ -141,7 +160,44 @@ void heapifyAnElement(Heap* h,int i)
     else
         return;
 }
-/*******************code to delete an element*////////////////
+/**********************code to heapify an min heap*////////////////////
+void heapifyAnElementMinHeap(Heap* h,int i)
+{
+    if(i==-1)
+        return;
+    else
+    {    int x,y,min_,temp;
+        tie(x,y)=ChildsOfAnyNode(i);
+        if(x!=-1&&y!=-1)
+        {
+            min_=h->arr[x]<h->arr[y]?x:y;
+            min_=h->arr[i]<h->arr[min_]?i:min_;
+        }
+        else
+            if(x==-1&&y!=-1)
+        {
+
+            min_=h->arr[i]<h->arr[y]?i:y;
+        }
+        else
+            if(x!=-1&&y==-1)
+        {
+            min_=h->arr[x]<h->arr[i]?x:i;
+        }
+        else
+            return;
+        if(min_!=i)
+        {
+            h->arr[i]=temp;
+            temp=h->arr[min_];
+            h->arr[min_]=temp
+            heapifyAnElementMinHeap(h,min_)
+        }
+        else
+            return;
+    }
+}
+/*******************code to delete an element in in heap*////////////////
 void heapDeleteMaxHeap(Heap* h)
 {
     h->arr[0]=h->arr[h->size_-1];
@@ -149,6 +205,13 @@ void heapDeleteMaxHeap(Heap* h)
     //cout<<"C";
     heapifyAnElement(h,0);
 
+}
+/******************code to delete an elemnt in amx heap*/////////////////
+void heapDeleteMinHeap(Heap* h)
+{
+    h->arr[0]=h->arr[h->size_-];
+    h->size_--;
+    heapifyAnElementMinHeap(h,i)
 }
 /***************code to build an heap from an array*///////////////////////////
 void buildHeap(Heap* &h,int arr_[],int n)
@@ -165,6 +228,22 @@ void buildHeap(Heap* &h,int arr_[],int n)
     {
         i=parentOfAnyNode(h,i);
         heapifyAnElement(h,i);
+    }
+}
+/*****************************build min heap*/////////////////////
+void buildHeapMin(Heap* &h,int arr[],int n)
+{
+    h=new Heap(n,0);
+    h->size_=n;
+    for(int i=0;i<n;i++)
+    {
+        h->arr[i]=arr[i];
+    }
+    int i=n-1;
+    while(parentOfAnyNode(i)!=-1)
+    {
+        i=parentOfAnyNode(i);
+        heapifyAnElementMinHeap(h,i);
     }
 }
 void heapSort(Heap* h)
@@ -201,7 +280,7 @@ else
 }
 }
 int main()
-{
+{/************
     Heap* h=NULL;
     insertIntoMaxHeap(h,3);
     insertIntoMaxHeap(h,2);
@@ -209,7 +288,7 @@ int main()
     insertIntoMaxHeap(h,1);
     insertIntoMaxHeap(h,6);
     insertIntoMaxHeap(h,13);
-    insertIntoMaxHeap(h,17);
+    insertIntoMaxHeap(h,17);*//////////////////////////
  //   cout<<h->capacity<<" "<<h->size_;
    // printHeapArray(h);
    // heapDeleteMaxHeap(h);
@@ -228,9 +307,10 @@ int main()
     h->size_=n;
     cout<<"\nsorted array";
     printHeapArray(h);*///////////////
-    if(isHeap(h,0))
+    /*****if(isHeap(h,0))
     cout<<"yes it is a heap";
     else
-        cout<<"it is not an heap";
+        cout<<"it is not an heap";*/////////////
+
     return 0;
 }
