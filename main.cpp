@@ -97,7 +97,7 @@ void insertIntoMaxHeap(Heap* &h,int data)
         h->arr[i]=data;
     }
 }
-/*******************code to insert data into min heap
+/*******************code to insert data into min heap*///////////////////////////
 void insertIntoMinHeap(Heap* &h,int data)
 {
     if(!h)
@@ -122,7 +122,7 @@ void insertIntoMinHeap(Heap* &h,int data)
     h->arr[i]=data;
     }
 
-}*///////////////////////////
+}
 /*********************code to print the heap*//////////////////////////////
 void printHeapArray(Heap* h)
 {
@@ -363,7 +363,40 @@ void mergeMaxHeaps(Heap* &h1,Heap* &h2)
     h1=NULL;
     buildHeap(h1,arr_,i);
 }
+int deleteKElement(Heap* h,int k)
+{
+    if(!h)
+        return 0;
+    else
+    {
+        Heap* h_min=NULL;
+        int x,y;
+        int i=0,j=0,temp;
+        insertIntoMinHeap(h_min,h->arr[j]);
+        while(1)
+        {
+         temp=minimumElemntOfMinHeap(h_min);
+       //  cout<<i<<":"<<temp<<" ";
+          heapDeleteMinHeap(h_min);
+         if(++i==k)
+            return temp;
+         else
+         {
 
+             tie(x,y)=ChildsOfAnyNode(h,j);
+             j++;
+             if(x!=-1)
+             insertIntoMinHeap(h_min,h->arr[x]);
+             if(y!=-1)
+             insertIntoMinHeap(h_min,h->arr[y]);
+
+
+         }
+        }
+
+
+    }
+}
 int main()
 {   /************
     Heap* h=NULL;
@@ -373,13 +406,15 @@ int main()
     insertIntoMaxHeap(h,1);
     insertIntoMaxHeap(h,6);
     insertIntoMaxHeap(h,13);
-
-    insertIntoMaxHeap(h,17);*//////////////////////////
+    insertIntoMaxHeap(h,17);
+    int k;
+    cin>>k;
+    */
     //   cout<<h->capacity<<" "<<h->size_;
     // printHeapArray(h);
     // heapDeleteMaxHeap(h);
-    /**** cout<<"\nafter deletion elements are";
-    printHeapArray(h);*/
+    /**** cout<<"\nafter deletion elements are";*/
+    //printHeapArray(h);
     /********* int arr[10000],n,temp;
     cin>>n;
     for(int i=0;i<n;i++)
@@ -397,22 +432,25 @@ int main()
     cout<<"yes it is a heap";
     else
         cout<<"it is not an heap";*/////////////
-/**********************thsi section is related to min heaps algorithms*//////////////
-  /***********  Heap* h=NULL;
+    /**********************this section is related to min heaps algorithms*//////////////
+    Heap* h=NULL;
     insertIntoMinHeap(h,3);
     insertIntoMinHeap(h,2);
     insertIntoMinHeap(h,4);
     insertIntoMinHeap(h,1);
     insertIntoMinHeap(h,6);
     insertIntoMinHeap(h,13);
-    printHeapArray(h);*////////////
+    printHeapArray(h);
+    int k;
+    cin>>k;
+    cout<<deleteKElement(h,k);
     /*** cout<<"\n maximum element in min heap is";
     cout<<giveMaxElementInMinHeap(h);*///
- /****   int data;
+    /****   int data;
     cin>>data;
-    deleteArbitraryElementFromMinHeap(h,data);
-    printHeapArray(h);*///
-   /******** vector<int>  vec;
+    deleteArbitraryElementFromMinHeap(h,data);*///
+    // printHeapArray(h);
+    /******** vector<int>  vec;
     int data;
     cin>>data;
     printSmallerThan(h,data,0,vec);
@@ -420,15 +458,17 @@ int main()
     for(auto it:vec)
         cout<<it<<" ";
     return 0;*//////////////////////////
+   /*****************
+    code for merging heaps
     Heap* h1=NULL,*h2=NULL;
-     insertIntoMaxHeap(h1,3);
+    insertIntoMaxHeap(h1,3);
     insertIntoMaxHeap(h1,2);
     insertIntoMaxHeap(h1,4);
     insertIntoMaxHeap(h1,1);
     insertIntoMaxHeap(h1,6);
     insertIntoMaxHeap(h1,13);
     printHeapArray(h1);
-     insertIntoMaxHeap(h2,5);
+    insertIntoMaxHeap(h2,5);
     insertIntoMaxHeap(h2,9);
     insertIntoMaxHeap(h2,13);
     insertIntoMaxHeap(h2,8);
@@ -438,5 +478,5 @@ int main()
     mergeMaxHeaps(h1,h2);
     printHeapArray(h1);
 
-
+*///////////////////////////
 }
