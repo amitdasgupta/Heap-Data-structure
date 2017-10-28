@@ -363,6 +363,7 @@ void mergeMaxHeaps(Heap* &h1,Heap* &h2)
     h1=NULL;
     buildHeap(h1,arr_,i);
 }
+/**********************
 int deleteKElement(Heap* h,int k)
 {
     if(!h)
@@ -396,9 +397,51 @@ int deleteKElement(Heap* h,int k)
 
 
     }
+}*///////////////
+/*************code to print k elements of max heap
+void printKMaxElementsmaxHeap(Heap* h,int k)
+{
+    if(!h)
+        return;
+    else
+    {
+      int temp;
+      while(k--)
+      {
+          temp=maximumElementOfMaxHeap(h);
+          heapDeleteMaxHeap(h);
+          cout<<temp<<" ";
+      }
+    }
+}*////////////////////////////
+void printKMaxElementsmaxHeap(Heap* h,int k)
+{
+    if(!h)
+        return;
+    else
+    {
+        Heap* h_max=NULL;
+        int x,y,temp;
+        int i=0;
+        insertIntoMaxHeap(h_max,h->arr[0]);
+        while(i<k)
+        {
+            tie(x,y)=ChildsOfAnyNode(h,i);
+            insertIntoMaxHeap(h_max,h->arr[x]);
+            insertIntoMaxHeap(h_max,h->arr[y]);
+            i++;
+        }
+        while(k--)
+        {
+            temp=maximumElementOfMaxHeap(h_max);
+            heapDeleteMaxHeap(h_max);
+            cout<<temp<<" ";
+        }
+
+    }
 }
 int main()
-{   /************
+{   /*************/
     Heap* h=NULL;
     insertIntoMaxHeap(h,3);
     insertIntoMaxHeap(h,2);
@@ -407,11 +450,13 @@ int main()
     insertIntoMaxHeap(h,6);
     insertIntoMaxHeap(h,13);
     insertIntoMaxHeap(h,17);
+
+
+    //   cout<<h->capacity<<" "<<h->size_;
+    printHeapArray(h);
     int k;
     cin>>k;
-    */
-    //   cout<<h->capacity<<" "<<h->size_;
-    // printHeapArray(h);
+    printKMaxElementsmaxHeap(h,k);
     // heapDeleteMaxHeap(h);
     /**** cout<<"\nafter deletion elements are";*/
     //printHeapArray(h);
@@ -433,7 +478,7 @@ int main()
     else
         cout<<"it is not an heap";*/////////////
     /**********************this section is related to min heaps algorithms*//////////////
-    Heap* h=NULL;
+  /**********  Heap* h=NULL;
     insertIntoMinHeap(h,3);
     insertIntoMinHeap(h,2);
     insertIntoMinHeap(h,4);
@@ -443,7 +488,7 @@ int main()
     printHeapArray(h);
     int k;
     cin>>k;
-    cout<<deleteKElement(h,k);
+    cout<<deleteKElement(h,k);*////////
     /*** cout<<"\n maximum element in min heap is";
     cout<<giveMaxElementInMinHeap(h);*///
     /****   int data;
