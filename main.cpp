@@ -1,9 +1,36 @@
 #include <iostream>
 #include<tuple>
 #include<vector>
+#include<queue>
 #define MAX_HEAP 1
 #define MIN_HEAP 0;
+#define pp pair<int,int>
 using namespace std;
+/***********************************stack implementation using priority queue*////////////////
+class Stack{
+    priority_queue<pp> pq;
+    int count=0;
+public:
+    void push(int data)
+    {
+        pq.push(pp(count++,data));
+    }
+    void pop()
+    {
+        pq.pop();
+    }
+    void top()
+    {
+        pp pd;
+        pd=pq.top();
+        cout<<pd.second<<" ";
+    }
+    bool isEmpty()
+    {
+        return pq.empty();
+    }
+
+};
 /******************defination of heap*/////////////////////////////
 class Heap{
 public:
@@ -414,6 +441,7 @@ void printKMaxElementsmaxHeap(Heap* h,int k)
       }
     }
 }*////////////////////////////
+/***************************code to find k max elements in max heap*///////////////////////////////
 void printKMaxElementsmaxHeap(Heap* h,int k)
 {
     if(!h)
@@ -441,7 +469,7 @@ void printKMaxElementsmaxHeap(Heap* h,int k)
     }
 }
 int main()
-{   /*************/
+{   /********
     Heap* h=NULL;
     insertIntoMaxHeap(h,3);
     insertIntoMaxHeap(h,2);
@@ -450,13 +478,13 @@ int main()
     insertIntoMaxHeap(h,6);
     insertIntoMaxHeap(h,13);
     insertIntoMaxHeap(h,17);
-
+*****/
 
     //   cout<<h->capacity<<" "<<h->size_;
-    printHeapArray(h);
-    int k;
+   // printHeapArray(h);
+   /**** int k;
     cin>>k;
-    printKMaxElementsmaxHeap(h,k);
+    printKMaxElementsmaxHeap(h,k);*///////////////
     // heapDeleteMaxHeap(h);
     /**** cout<<"\nafter deletion elements are";*/
     //printHeapArray(h);
@@ -524,4 +552,18 @@ int main()
     printHeapArray(h1);
 
 *///////////////////////////
+Stack s;
+int n,temp;
+cin>>n;
+for(int i=0;i<n;i++)
+{
+    cin>>temp;
+    s.push(temp);
+}
+while(!s.isEmpty())
+{
+    s.top();
+    s.pop();
+}
+
 }
