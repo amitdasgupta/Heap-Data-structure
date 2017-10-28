@@ -31,6 +31,34 @@ public:
     }
 
 };
+/***********************implementation of queue using min heap*////////////////////////
+class MyComparator{
+public:
+    bool operator()(pp &a,pp &b)
+    {
+        return a.first>b.first;
+    }
+};
+class Queue{
+    priority_queue<pp,vector<pp>,MyComparator> pq;
+int count=0;
+public:
+    void enQueue(int data)
+    {
+        pq.push(pp(++count,data));
+    }
+    void deQueue()
+    {
+        pp pd=pq.top();
+        pq.pop();
+        cout<<pd.second<<" ";
+    }
+    bool isEmpty()
+    {
+        return pq.empty();
+    }
+
+};
 /******************defination of heap*/////////////////////////////
 class Heap{
 public:
@@ -552,18 +580,18 @@ int main()
     printHeapArray(h1);
 
 *///////////////////////////
-Stack s;
+Queue s;
 int n,temp;
 cin>>n;
 for(int i=0;i<n;i++)
 {
     cin>>temp;
-    s.push(temp);
+    s.enQueue(temp);
 }
 while(!s.isEmpty())
 {
-    s.top();
-    s.pop();
+
+    s.deQueue();
 }
 
 }
